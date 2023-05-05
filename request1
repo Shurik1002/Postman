@@ -10,3 +10,9 @@ curl --location 'https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos
 var jsonData = JSON.parse(responseBody);
 var id = jsonData.photos[1].id;
 pm.environment.set("id", id);
+
+Проверка, что название марсохода, сделавшего первое фото, присутствует именно в ключе name
+pm.test("Your test name", function () {
+    var jsonData = pm.response.json();
+    pm.expect(jsonData.photos[0].rover.name).to.eql("Curiosity");
+});
